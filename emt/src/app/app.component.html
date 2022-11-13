@@ -1,0 +1,83 @@
+<div class="container">
+  
+  <!--Nav Bar-->
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">User Management Tool</a>
+      </div>
+    </div>
+  </nav>
+
+  <!--Employee Form -->
+
+  <form #f="ngForm" (ngSubmit)="addEmployee(f)">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">@</span>
+          <input ngModel name="id" #id="ngModel" required type="number" class="form-control" placeholder="User Id"
+            aria-describedby="sizing-addon1">
+        </div>
+        <br>
+        <div *ngIf="!id.valid && id.touched" class="alert alert-danger" role="alert">Pleae Enter a valid User Id</div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">@</span>
+          <input ngModel name="name" #name="ngModel" required type="number" class="form-control" placeholder="Name"
+            aria-describedby="sizing-addon1">
+        </div>
+        <br>
+        <div *ngIf="!id.valid && id.touched" class="alert alert-danger" role="alert">Pleae Enter a valid User Name</div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">@</span>
+          <input ngModel name="email" #email="ngModel" required type="email" class="form-control" placeholder="Email"
+            aria-describedby="sizing-addon1">
+        </div>
+        <br>
+        <div *ngIf="!email.valid && email.touched" class="alert alert-danger" role="alert">Please Enter a valid Email Id
+        </div>
+      </div>
+    </div>
+    <br>
+    <div style="text-align: center;">
+      <button class="btn btn-danger" type="button" (click)="clearForm()">Cancel</button> |
+      <button class="btn btn-success" [disabled]="!f.valid" type="submit">{{btnMode}}</button>
+    </div>
+  </form>
+
+  <hr>
+
+  <!--Employee Table-->
+
+  <h3>List of Users</h3>
+  <br><br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let employee of employees ">
+      <tr>
+        <td>{{employee.id}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.email}}</td>
+        <div>
+          <button class="btn btn-warning btn-sm" (click)="updateEmployee(employee)">Update</button> |
+          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.id)">Delete</button>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
